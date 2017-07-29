@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour {
     public GameObject bulletPrefab;
     public Transform bulletLocation;
 
+    private Animator legAnimator;
+    public GameObject legs;
+    public float walkAnimationStart;
+    public float walkAnimationSpeed;
+
     private bool grounded = false;
     //private Animator anim;
     private Rigidbody2D rb2d;
@@ -21,7 +26,7 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Awake()
     {
-        //anim = GetComponent<Animator>();
+        legAnimator = legs.GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -29,6 +34,7 @@ public class PlayerController : MonoBehaviour {
     void Update()
     {
         grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        legAnimator.SetBool("Grounded", grounded);
 
         if (Input.GetButtonDown(jumpKey) && grounded)
         {
@@ -49,7 +55,14 @@ public class PlayerController : MonoBehaviour {
     {
         float h = Input.GetAxis(leftRightKey);
 
-        //anim.SetFloat("Speed", Mathf.Abs(h));
+        legAnimator.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x)*walkAnimationSpeed);
+        if (walkAnimationStart <= Mathf.Abs(rb2d.velocity.x))
+        {
+            legAnimator.SetBool("Moveing", true);
+        } else
+        {
+            legAnimator.SetBool("Moveing", false);
+        }
 
         if (h * rb2d.velocity.x < maxSpeed)
             rb2d.AddForce(Vector2.right * h * moveForce);
@@ -64,7 +77,7 @@ public class PlayerController : MonoBehaviour {
 
         if (jump)
         {
-            //anim.SetTrigger("Jump");
+            legAnimator.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
         }
