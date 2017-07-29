@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour {
             if (facingRight == false)
             {
                 bullet.GetComponent<BulletScript>().speed = bullet.GetComponent<BulletScript>().speed * -1;
+                bullet.GetComponent<BulletScript>().bulletFacingRight = false;
             }
         }
     }
