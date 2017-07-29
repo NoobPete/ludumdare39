@@ -28,6 +28,17 @@ public class BatteryFillScript : MonoBehaviour {
         fill.transform.localPosition = new Vector3(positionFull.x, positionFull.y + (100-fillAmount) * fillOffset, positionFull.z);
 
         spriteRenderer.color = fillColor;
+    }
 
+    public bool ChangeLevel(float amaount)
+    {
+        fillAmount = Mathf.Clamp(fillAmount+amaount, 0, 100);
+
+        if (fillAmount == 0)
+        {
+            return true;
+        }
+
+        return false;
     }
 }
