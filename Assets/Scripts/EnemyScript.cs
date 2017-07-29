@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour {
     private BatteryFillScript fill;
+    private HealthInvisibleScript health;
 
 	// Use this for initialization
 	void Start () {
         fill = GetComponent<BatteryFillScript>();
+        health = GetComponent<HealthInvisibleScript>();
 	}
 	
 	// Update is called once per frame
@@ -20,9 +22,21 @@ public class EnemyScript : MonoBehaviour {
         if (collision.gameObject.GetComponent<BulletScript>() != null)
         {
             Destroy(collision.gameObject);
-            if (fill.ChangeLevel(-35))
+
+            if (fill != null)
             {
-                Destroy(gameObject);
+                if (fill.ChangeLevel(-35))
+                {
+                    Destroy(gameObject);
+                }
+            }
+
+            if (health != null)
+            {
+                if (health.ChangeLevel(-35))
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }
