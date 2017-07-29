@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour {
     public float maxSpeed = 5f;
     public float jumpForce = 1000f;
     public Transform groundCheck;
-    public string jumpKey, leftRightKey, upDownKey;
-
+    public string jumpKey, leftRightKey, upDownKey, normalFireKey;
+    public GameObject bulletPrefab;
+    public Transform bulletLocation;
 
     private bool grounded = false;
     //private Animator anim;
@@ -32,6 +33,15 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown(jumpKey) && grounded)
         {
             jump = true;
+        }
+
+        if (Input.GetButtonDown(normalFireKey))
+        {
+            GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity);
+            if (facingRight == false)
+            {
+                bullet.GetComponent<BulletScript>().speed = bullet.GetComponent<BulletScript>().speed * -1;
+            }
         }
     }
 
