@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBulletScript : MonoBehaviour {
+    public float damage = 40;
 
 	// Use this for initialization
 	void Start () {
@@ -16,6 +17,6 @@ public class EnemyBulletScript : MonoBehaviour {
 
     public float GetDamage()
     {
-        return 40;
+        return damage;
     }
 }

@@ -110,10 +110,15 @@ public class PlayerController : MonoBehaviour {
         {
             float damage = ebs.GetDamage();
             Destroy(collision.gameObject);
-            if (fill.ChangeLevel(damage))
+            if (fill.ChangeLevel(-damage))
             {
                 //ded
             }
         }
+    }
+
+    public bool Damage(float amount)
+    {
+        return fill.ChangeLevel(-amount);
     }
 }

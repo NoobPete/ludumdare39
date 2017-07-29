@@ -24,6 +24,19 @@ public class RocketFlyDownScript : MonoBehaviour {
 
         if (grounded)
         {
+            List<PlayerController> alreadyHit = new List<PlayerController>();
+            foreach (RaycastHit2D rc in Physics2D.BoxCastAll(transform.position, new Vector2(2.2f, 4.4f), 0f, new Vector2(0, 0)))
+            {
+                PlayerController player = rc.transform.GetComponent<PlayerController>();
+                if (player != null)
+                {
+                    if (!alreadyHit.Contains(player))
+                    {
+                        alreadyHit.Add(player);
+                        player.Damage(20);
+                    }
+                }
+            }
             Destroy(gameObject);
         }
     }

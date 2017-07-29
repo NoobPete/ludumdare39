@@ -1,11 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketBossScript : MonoBehaviour {
     public GameObject rocketUpPrefab;
+    public GameObject rocketDownPrefab;
     public Transform[] firePositions;
+    public Transform downPositionMiddle;
     public int attackMode = 1;
+    private float timer = 0f;
+    private int stage = 1;
 
 	// Use this for initialization
 	void Start () {
@@ -14,8 +19,20 @@ public class RocketBossScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        timer += Time.deltaTime;
+
+        if (timer>2f && stage == 1)
+        {
+            timer = 0f;
+            SpawnDownRocket(UnityEngine.Random.Range(-100,100));
+        }
 	}
+
+    private void SpawnDownRocket(int location)
+    {
+        GameObject o = Instantiate(rocketDownPrefab, downPositionMiddle.transform.position, Quaternion.Euler(180, 0, 0));
+        o.transform.position = new Vector3(o.transform.position.x, o.transform.position.y + location / 100f);
+    }
 
     public void FireMissiel(int round)
     {
