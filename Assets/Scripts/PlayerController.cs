@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
     public float moveForce = 365f;
@@ -44,9 +45,16 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown(normalFireKey))
         {
             GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity);
-            if (facingRight == false)
+
+            if (Input.GetButton(upDownKey))
             {
-                bullet.GetComponent<BulletScript>().speed = bullet.GetComponent<BulletScript>().speed * -1;
+                bullet.GetComponent<BulletScript>().horizontalSpeed = 0;
+                bullet.GetComponent<BulletScript>().verticalSpeed = 6;
+                bullet.GetComponent<BulletScript>().bulletFacingUpwards = true;
+            }
+            else if (facingRight == false)
+            {
+                bullet.GetComponent<BulletScript>().horizontalSpeed = bullet.GetComponent<BulletScript>().horizontalSpeed * -1;
                 bullet.GetComponent<BulletScript>().bulletFacingRight = false;
             }
         }
@@ -56,11 +64,12 @@ public class PlayerController : MonoBehaviour {
     {
         float h = Input.GetAxis(leftRightKey);
 
-        legAnimator.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x)*walkAnimationSpeed);
+        legAnimator.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) * walkAnimationSpeed);
         if (walkAnimationStart <= Mathf.Abs(rb2d.velocity.x))
         {
             legAnimator.SetBool("Moveing", true);
-        } else
+        }
+        else
         {
             legAnimator.SetBool("Moveing", false);
         }

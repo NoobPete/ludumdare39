@@ -4,20 +4,26 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour {
 
-    public int speed = 6;
+    public int horizontalSpeed = 6;
+    public int verticalSpeed = 0;
     public bool bulletFacingRight = true;
+    public bool bulletFacingUpwards = false;
 
 	// Use this for initialization
 	void Start () {
         var r2d = GetComponent<Rigidbody2D>();
 
-        r2d.velocity = new Vector3(speed, 0);
+        r2d.velocity = new Vector3(horizontalSpeed, verticalSpeed);
 
         if (bulletFacingRight == false)
         {
             Vector3 theScale = transform.localScale;
             theScale.x *= -1;
             transform.localScale = theScale;
+        }
+        if (bulletFacingUpwards == true)
+        {
+            transform.Rotate(new Vector3(0, 0, 90));
         }
 	}
 	
