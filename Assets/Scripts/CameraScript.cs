@@ -17,7 +17,7 @@ public class CameraScript : MonoBehaviour {
 	void Update () {
         if (player2 != null)
         {
-            transform.position = player1.transform.position + (player2.transform.position - player1.transform.position) / 2 + new Vector3(0, 0, distance);
+            transform.position = player1.transform.position + (player2.transform.position - player1.transform.position) / 2 + new Vector3(0, upDown, distance);
         } else
         {
             transform.position = player1.transform.position + new Vector3(0, upDown, distance);
