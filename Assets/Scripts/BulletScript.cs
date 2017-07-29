@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour {
+public class BulletScript : MonoBehaviour
+{
 
     public int horizontalSpeed = 6;
     public int verticalSpeed = 0;
     public bool bulletFacingRight = true;
     public bool bulletFacingUpwards = false;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         var r2d = GetComponent<Rigidbody2D>();
 
         r2d.velocity = new Vector3(horizontalSpeed, verticalSpeed);
@@ -25,12 +27,13 @@ public class BulletScript : MonoBehaviour {
         {
             transform.Rotate(new Vector3(0, 0, 90));
         }
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     void OnBecameInvisible()
     {

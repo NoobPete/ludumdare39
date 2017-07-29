@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+public class PlayerController : MonoBehaviour {
     [HideInInspector] public bool facingRight = true;
     [HideInInspector] public bool jump = false;
     public float moveForce = 365f;
@@ -23,12 +22,14 @@ public class PlayerController : MonoBehaviour
     //private Animator anim;
     private Rigidbody2D rb2d;
 
+    private BatteryFillScript fill;
 
     // Use this for initialization
     void Awake()
     {
         legAnimator = legs.GetComponent<Animator>();
         rb2d = GetComponent<Rigidbody2D>();
+        fill = GetComponent<BatteryFillScript>();
     }
 
     // Update is called once per frame
@@ -64,12 +65,11 @@ public class PlayerController : MonoBehaviour
     {
         float h = Input.GetAxis(leftRightKey);
 
-        legAnimator.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x) * walkAnimationSpeed);
+        legAnimator.SetFloat("Speed", Mathf.Abs(rb2d.velocity.x)*walkAnimationSpeed);
         if (walkAnimationStart <= Mathf.Abs(rb2d.velocity.x))
         {
             legAnimator.SetBool("Moveing", true);
-        }
-        else
+        } else
         {
             legAnimator.SetBool("Moveing", false);
         }
@@ -100,5 +100,20 @@ public class PlayerController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        EnemyBulletScript ebs = collision.gameObject.GetComponent<EnemyBulletScript>();
+
+        if (ebs != null)
+        {
+            float damage = ebs.GetDamage();
+            Destroy(collision.gameObject);
+            if (fill.ChangeLevel(damage))
+            {
+                //ded
+            }
+        }
     }
 }
