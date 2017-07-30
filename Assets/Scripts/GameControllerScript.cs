@@ -15,6 +15,7 @@ public class GameControllerScript : MonoBehaviour
     public AudioSource[] enemyHitSound;
     public AudioSource[] explosionSound;
     public AudioSource[] bulletCollsionSound;
+    public AudioSource[] healSound;
 
     // Use this for initialization
     void Start()
@@ -85,5 +86,10 @@ public class GameControllerScript : MonoBehaviour
     public void PlayBulletCollision()
     {
         bulletCollsionSound[UnityEngine.Random.Range((int)0, bulletCollsionSound.Length - 1)].Play();
+    }
+
+    public void PlayHealSound()
+    {
+        healSound[UnityEngine.Random.Range((int)0, healSound.Length - 1)].Play();
     }
 }

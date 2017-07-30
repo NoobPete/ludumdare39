@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour {
     public float jumpForce = 1000f;
     public Transform groundCheck;
     public string jumpKey, leftRightKey, upDownKey, normalFireKey;
+
     public GameObject bulletPrefab;
     public Transform bulletLocation1;
     public Transform bulletLocation2;
@@ -107,6 +109,13 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    internal void Heal(int amount)
+    {
+        fill.ChangeLevel(amount);
+
+        GameControllerScript.main.PlayHealSound();
+
+    }
 
     void Flip()
     {
