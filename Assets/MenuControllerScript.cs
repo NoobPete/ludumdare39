@@ -3,14 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class MenuControllerScript : MonoBehaviour {
     public GameObject playPanel;
+    public GameObject optionsPanel;
     public AudioSource clickSound;
+    public AudioMixer mixer;
 
 	// Use this for initialization
-	void Start () {
-		
+	void Start () { 
+
 	}
 	
 	// Update is called once per frame
@@ -21,6 +24,7 @@ public class MenuControllerScript : MonoBehaviour {
     public void PlayButton()
     {
         playPanel.SetActive(!playPanel.activeSelf);
+        optionsPanel.SetActive(false);
         playClickSound();
     }
 
@@ -49,7 +53,28 @@ public class MenuControllerScript : MonoBehaviour {
 
     public void OptionsButton()
     {
-
+        playPanel.SetActive(false);
+        optionsPanel.SetActive(!optionsPanel.activeSelf);
         playClickSound();
+    }
+
+    public void SetMasterLevel(float level)
+    {
+        mixer.SetFloat("MasterVol", -80 + level * 80f);
+    }
+
+    public void SetMusicLevel(float level)
+    {
+        mixer.SetFloat("MusicVolume", -80 + level * 80f);
+    }
+
+    public void SetMSELevel(float level)
+    {
+        mixer.SetFloat("MSEVol", -80 + level * 80f);
+    }
+
+    public void SetSELevel(float level)
+    {
+        mixer.SetFloat("SEVol", -80 + level * 80f);
     }
 }
