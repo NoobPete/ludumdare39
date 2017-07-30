@@ -16,6 +16,7 @@ public class DestoryOnGroundHitScript : MonoBehaviour {
 
         if (grounded)
         {
+            GameControllerScript.main.PlayBulletCollision();
             Destroy(gameObject);
         }
     }

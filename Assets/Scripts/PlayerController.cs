@@ -131,6 +131,16 @@ public class PlayerController : MonoBehaviour {
 
     public bool Damage(float amount)
     {
-        return fill.ChangeLevel(-amount);
+        if (fill.ChangeLevel(-amount))
+        {
+            //ded
+            GameControllerScript.main.PlayDeathSound();
+            return true;
+        }
+        else
+        {
+            GameControllerScript.main.PlayHitSoundSound();
+            return false;
+        }
     }
 }
