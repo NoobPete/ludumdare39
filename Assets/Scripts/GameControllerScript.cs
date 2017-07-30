@@ -31,6 +31,10 @@ public class GameControllerScript : MonoBehaviour
 
         for (int i = 0; i < player.Length; i++)
         {
+            if (player[i] == null)
+            {
+                continue;
+            }
             if (Vector2.Distance(player[i].transform.position, transform.transform.position) < smallestDistanceYet)
             {
                 smallestDistanceYet = Vector2.Distance(player[i].transform.position, transform.transform.position);
