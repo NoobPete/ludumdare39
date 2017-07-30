@@ -10,6 +10,7 @@ public class GameControllerScript : MonoBehaviour
     public AudioSource[] jumpSound;
     public AudioSource[] shootSound;
     public AudioSource[] deathSound;
+    public AudioSource[] enemyDeathSound;
     public AudioSource[] hitSound;
     public AudioSource[] enemyHitSound;
     public AudioSource[] explosionSound;
