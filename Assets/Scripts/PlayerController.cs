@@ -19,6 +19,10 @@ public class PlayerController : MonoBehaviour {
     public float walkAnimationStart;
     public float walkAnimationSpeed;
 
+    public float maxShootSpeed = 0.6f;
+    public float holdingShootSpeed = 1.5f;
+    private float shootTimer = 0f;
+
     private bool grounded = false;
     //private Animator anim;
     private Rigidbody2D rb2d;
@@ -44,9 +48,11 @@ public class PlayerController : MonoBehaviour {
             jump = true;
         }
 
-        if (Input.GetButtonDown(normalFireKey))
-        {
+        shootTimer += Time.deltaTime;
 
+        if ((Input.GetButtonDown(normalFireKey) && shootTimer >= maxShootSpeed))
+        {
+            shootTimer = 0;
             GameControllerScript.main.PlayShootSound();
             if (Input.GetButton(upDownKey))
             {
