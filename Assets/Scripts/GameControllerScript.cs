@@ -7,6 +7,12 @@ public class GameControllerScript : MonoBehaviour
 {
     public GameObject[] player;
     public static GameControllerScript main;
+    public AudioSource[] jumpSound;
+    public AudioSource[] shootSound;
+    public AudioSource[] deathSound;
+    public AudioSource[] hitSound;
+    public AudioSource[] enemyHitSound;
+    public AudioSource[] explosionSound;
 
     // Use this for initialization
     void Start()
@@ -42,5 +48,35 @@ public class GameControllerScript : MonoBehaviour
             }
         }
         return result;
+    }
+
+    public void PlayJumpSound()
+    {
+        jumpSound[UnityEngine.Random.Range((int)0, jumpSound.Length - 1)].Play();
+    }
+
+    public void PlayShootSound()
+    {
+        shootSound[UnityEngine.Random.Range((int)0, shootSound.Length - 1)].Play();
+    }
+
+    public void PlayDeathSound()
+    {
+        deathSound[UnityEngine.Random.Range((int)0, deathSound.Length - 1)].Play();
+    }
+
+    public void PlayHitSoundSound()
+    {
+        hitSound[UnityEngine.Random.Range((int)0, hitSound.Length - 1)].Play();
+    }
+
+    public void PlayEnemyHitSound()
+    {
+        enemyHitSound[UnityEngine.Random.Range((int)0, enemyHitSound.Length - 1)].Play();
+    }
+
+    public void PlayExplosionSound()
+    {
+        explosionSound[UnityEngine.Random.Range((int)0, explosionSound.Length - 1)].Play();
     }
 }

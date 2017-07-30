@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour {
             legAnimator.SetTrigger("Jump");
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jump = false;
+            GameControllerScript.main.PlayJumpSound();
         }
     }
 
