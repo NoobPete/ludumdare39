@@ -47,6 +47,7 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetButtonDown(normalFireKey))
         {
 
+            GameControllerScript.main.PlayShootSound();
             if (Input.GetButton(upDownKey))
             {
                 GameObject bullet = Instantiate(bulletPrefab, bulletLocation2.position, Quaternion.identity);
@@ -120,6 +121,10 @@ public class PlayerController : MonoBehaviour {
             if (fill.ChangeLevel(-damage))
             {
                 //ded
+                GameControllerScript.main.PlayDeathSound();
+            } else
+            {
+                GameControllerScript.main.PlayHitSoundSound();
             }
         }
     }

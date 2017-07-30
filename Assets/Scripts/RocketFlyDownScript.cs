@@ -37,6 +37,7 @@ public class RocketFlyDownScript : MonoBehaviour {
                     }
                 }
             }
+            GameControllerScript.main.PlayExplosionSound();
             Destroy(gameObject);
         }
     }
