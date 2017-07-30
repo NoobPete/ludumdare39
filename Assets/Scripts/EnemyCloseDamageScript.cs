@@ -20,7 +20,7 @@ public class EnemyCloseDamageScript : MonoBehaviour
         if (timeMeasurement >= 3)
         {
             List<PlayerController> alreadyHit = new List<PlayerController>();
-            foreach (RaycastHit2D rc in Physics2D.BoxCastAll(transform.position, new Vector2(1.1f, 4.4f), 0f, new Vector2(0, 0)))
+            foreach (RaycastHit2D rc in Physics2D.BoxCastAll(transform.position, new Vector2(1.1f, 2.1f), 0f, new Vector2(0, 0)))
             {
                 PlayerController player = rc.transform.GetComponent<PlayerController>();
                 if (player != null)
