@@ -135,10 +135,11 @@ public class PlayerController : MonoBehaviour {
             Destroy(collision.gameObject);
             if (fill.ChangeLevel(-damage))
             {
-                //ded
+                Destroy(gameObject);
                 GameControllerScript.main.PlayDeathSound();
             } else
             {
+                Destroy(gameObject);
                 GameControllerScript.main.PlayHitSoundSound();
             }
         }
@@ -148,14 +149,17 @@ public class PlayerController : MonoBehaviour {
     {
         if (fill.ChangeLevel(-amount))
         {
-            //ded
-            GameControllerScript.main.PlayDeathSound();
-            return true;
         }
         else
         {
             GameControllerScript.main.PlayHitSoundSound();
-            return false;
         }
+
+        if (fill.fillAmount == 0) {
+            GameControllerScript.main.PlayDeathSound();
+            Destroy(gameObject);
+        }
+
+        return false;
     }
 }

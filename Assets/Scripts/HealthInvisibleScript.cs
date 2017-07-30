@@ -6,9 +6,12 @@ using UnityEngine;
 public class HealthInvisibleScript : MonoBehaviour {
     public float health;
     private float maxHealth;
+    public bool canTakeDamage = false;
+    public GameObject levelChanger;
 
 	// Use this for initialization
 	void Start () {
+        health = health * PlayerPrefs.GetInt("PlayerCount");
         maxHealth = health;
 	}
 	
@@ -19,13 +22,21 @@ public class HealthInvisibleScript : MonoBehaviour {
 
     internal bool ChangeLevel(int amount)
     {
-        health = Mathf.Clamp(health + amount, 0, maxHealth);
-
-        if (health == 0)
+        if (canTakeDamage)
         {
-            return true;
-        }
+            health = Mathf.Clamp(health + amount, 0, maxHealth);
 
+            if (health == 0)
+            {
+                if (levelChanger != null)
+                {
+                    Instantiate(levelChanger);
+                }
+                return true;
+            }
+
+            return false;
+        }
         return false;
     }
 }

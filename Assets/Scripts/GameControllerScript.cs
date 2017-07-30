@@ -53,6 +53,35 @@ public class GameControllerScript : MonoBehaviour
         return result;
     }
 
+    internal GameObject GetFarthestPlayer(Transform transform)
+    {
+        float biggestDistance = 0;
+        GameObject result = null;
+
+        for (int i = 0; i < player.Length; i++)
+        {
+            if (player[i] == null)
+            {
+                continue;
+            }
+            if (Vector2.Distance(player[i].transform.position, transform.transform.position) > biggestDistance)
+            {
+                biggestDistance = Vector2.Distance(player[i].transform.position, transform.transform.position);
+                result = player[i];
+            }
+        }
+        return result;
+    }
+
+    public int GetPlayerCount()
+    {
+        if(player[1] == null)
+        {
+            return 1;
+        }
+        return 2;
+    }
+
     public void PlayJumpSound()
     {
         jumpSound[UnityEngine.Random.Range((int)0, jumpSound.Length - 1)].Play();
