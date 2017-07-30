@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour {
     public Transform groundCheck;
     public string jumpKey, leftRightKey, upDownKey, normalFireKey;
     public GameObject bulletPrefab;
-    public Transform bulletLocation;
+    public Transform bulletLocation1;
+    public Transform bulletLocation2;
 
     private Animator legAnimator;
     public GameObject legs;
@@ -45,18 +46,23 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButtonDown(normalFireKey))
         {
-            GameObject bullet = Instantiate(bulletPrefab, bulletLocation.position, Quaternion.identity);
 
             if (Input.GetButton(upDownKey))
             {
+                GameObject bullet = Instantiate(bulletPrefab, bulletLocation2.position, Quaternion.identity);
                 bullet.GetComponent<BulletScript>().horizontalSpeed = 0;
                 bullet.GetComponent<BulletScript>().verticalSpeed = 6;
                 bullet.GetComponent<BulletScript>().bulletFacingUpwards = true;
             }
             else if (facingRight == false)
             {
+                GameObject bullet = Instantiate(bulletPrefab, bulletLocation1.position, Quaternion.identity);
                 bullet.GetComponent<BulletScript>().horizontalSpeed = bullet.GetComponent<BulletScript>().horizontalSpeed * -1;
                 bullet.GetComponent<BulletScript>().bulletFacingRight = false;
+            }
+            else
+            {
+                GameObject bullet = Instantiate(bulletPrefab, bulletLocation1.position, Quaternion.identity);
             }
         }
     }
