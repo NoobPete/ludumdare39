@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour {
         {
             shootTimer = 0;
             GameControllerScript.main.PlayShootSound();
-            if (Input.GetButton(upDownKey))
+            if (Input.GetButton(upDownKey) || Input.GetAxis(upDownKey) > 0.8f)
             {
                 GameObject bullet = Instantiate(bulletPrefab, bulletLocation2.position, Quaternion.identity);
                 bullet.GetComponent<BulletScript>().horizontalSpeed = 0;
