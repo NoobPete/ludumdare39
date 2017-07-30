@@ -69,9 +69,11 @@ public class RocketBossScript : MonoBehaviour {
             if (number < 1)
             {
                 SpawnLeft(mellee);
-            } else if (number < 2) ;
+                SpawnRight(shooting);
+            } else if (number < 2)
             {
                 SpawnRight(mellee);
+                SpawnLeft(shooting);
             }
         }
 

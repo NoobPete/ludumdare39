@@ -139,7 +139,6 @@ public class PlayerController : MonoBehaviour {
                 GameControllerScript.main.PlayDeathSound();
             } else
             {
-                Destroy(gameObject);
                 GameControllerScript.main.PlayHitSoundSound();
             }
         }

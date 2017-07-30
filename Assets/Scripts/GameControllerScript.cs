@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameControllerScript : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameControllerScript : MonoBehaviour
     public AudioSource[] bulletCollsionSound;
     public AudioSource[] healSound;
 
+    public GameObject levelChanger;
+
     // Use this for initialization
     void Start()
     {
@@ -30,7 +33,10 @@ public class GameControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (player[0] == null && player[1] == null)
+        {
+            Instantiate(levelChanger);
+        }
     }
 
     internal GameObject GetClosestPlayer(Transform transform)

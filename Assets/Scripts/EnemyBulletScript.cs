@@ -17,6 +17,9 @@ public class EnemyBulletScript : MonoBehaviour {
 
     public float GetDamage()
     {
-        return damage;
+        float returnval = damage;
+        damage = 0;
+
+        return returnval;
     }
 }
