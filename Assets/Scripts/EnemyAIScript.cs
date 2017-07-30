@@ -16,7 +16,7 @@ public class EnemyAIScript : MonoBehaviour
     void FixedUpdate()
     {
         // Check if player is close enough to start pursuit
-        GameObject closestsPlayer = GameControllerScript.main.GetClosestPlayer(this);
+        GameObject closestsPlayer = GameControllerScript.main.GetClosestPlayer(transform);
 
         if (Vector2.Distance(gameObject.transform.position, closestsPlayer.transform.position) < 10)
         {

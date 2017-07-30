@@ -20,16 +20,16 @@ public class GameControllerScript : MonoBehaviour
 
     }
 
-    internal GameObject GetClosestPlayer(EnemyAIScript enemyAIScript)
+    internal GameObject GetClosestPlayer(Transform transform)
     {
         float smallestDistanceYet = float.MaxValue;
         GameObject result = null;
 
         for (int i = 0; i < player.Length; i++)
         {
-            if (Vector2.Distance(player[i].transform.position, enemyAIScript.transform.position) < smallestDistanceYet)
+            if (Vector2.Distance(player[i].transform.position, transform.transform.position) < smallestDistanceYet)
             {
-                smallestDistanceYet = Vector2.Distance(player[i].transform.position, enemyAIScript.transform.position);
+                smallestDistanceYet = Vector2.Distance(player[i].transform.position, transform.transform.position);
                 result = player[i];
             }
         }
