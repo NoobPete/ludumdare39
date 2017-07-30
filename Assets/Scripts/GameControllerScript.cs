@@ -12,6 +12,10 @@ public class GameControllerScript : MonoBehaviour
     void Start()
     {
         main = this;
+        if (PlayerPrefs.GetInt("PlayerCount") == 1)
+        {
+            Destroy(player[1]);
+        }
     }
 
     // Update is called once per frame
