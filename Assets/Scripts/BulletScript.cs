@@ -9,6 +9,8 @@ public class BulletScript : MonoBehaviour
     public int verticalSpeed = 0;
     public bool bulletFacingRight = true;
     public bool bulletFacingUpwards = false;
+    private bool makeEffect = true;
+    public GameObject hitParticals;
 
     // Use this for initialization
     void Start()
@@ -39,5 +41,13 @@ public class BulletScript : MonoBehaviour
     {
         // Destroy the bullet 
         Destroy(gameObject);
+    }
+
+    void OnDestroy()
+    {
+        if (makeEffect)
+        {
+            Destroy(Instantiate(hitParticals, transform.position, Quaternion.identity), 2);
+        }
     }
 }

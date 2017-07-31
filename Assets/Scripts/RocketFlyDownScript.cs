@@ -7,6 +7,7 @@ public class RocketFlyDownScript : MonoBehaviour {
     public float speed = 5;
 
     public Transform groundCheck;
+    public GameObject hitParticals;
 
     // Use this for initialization
     void Start()
@@ -40,5 +41,10 @@ public class RocketFlyDownScript : MonoBehaviour {
             GameControllerScript.main.PlayExplosionSound();
             Destroy(gameObject);
         }
+    }
+
+    void OnDestroy()
+    {
+        Destroy(Instantiate(hitParticals, transform.position, Quaternion.identity), 5); 
     }
 }

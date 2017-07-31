@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketBossScript : MonoBehaviour {
+    public GameObject hitParticals;
     public GameObject rocketUpPrefab;
     public GameObject rocketDownPrefab;
     public Transform[] firePositions;
@@ -19,8 +20,8 @@ public class RocketBossScript : MonoBehaviour {
 
     private Animator ani;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 		ani = GetComponent<Animator>();
     }
 	
@@ -140,5 +141,10 @@ public class RocketBossScript : MonoBehaviour {
                 break;
 
         }
+    }
+
+    void OnDestroy()
+    {
+        Destroy(Instantiate(hitParticals, transform.position, Quaternion.identity), 6);
     }
 }
