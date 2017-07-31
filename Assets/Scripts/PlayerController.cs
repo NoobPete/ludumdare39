@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour {
     public float moveForce = 365f;
     public float maxSpeed = 5f;
     public float jumpForce = 1000f;
-    public Transform groundCheck;
+    public Transform[] groundCheck;
     public string jumpKey, leftRightKey, upDownKey, normalFireKey;
 
     public GameObject bulletPrefab;
@@ -42,7 +42,17 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
+        grounded = false;
+
+        foreach (Transform t in groundCheck)
+        {
+            if (Physics2D.Linecast(transform.position, t.position, 1 << LayerMask.NameToLayer("Ground")))
+            {
+                grounded = true;
+                break;
+            }
+        }
+
         legAnimator.SetBool("Grounded", grounded);
 
         if (Input.GetButtonDown(jumpKey) && grounded)
