@@ -12,9 +12,18 @@ public class MenuControllerScript : MonoBehaviour {
     public AudioMixer mixer;
 
 	// Use this for initialization
-	void Start () { 
+	void Start () {
+        if (PlayerPrefs.GetInt("PlayerCount") == 0)
+        {
+            PlayerPrefs.SetInt("PlayerCount", 1);
+        }
 
-	}
+        if (PlayerPrefs.GetInt("LevelSelected") == 0)
+        {
+            PlayerPrefs.SetInt("LevelSelected", 1);
+        }
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,7 +50,7 @@ public class MenuControllerScript : MonoBehaviour {
 
     public void StartGame()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(PlayerPrefs.GetInt("LevelSelected"));
         playClickSound();
     }
 
@@ -76,5 +85,11 @@ public class MenuControllerScript : MonoBehaviour {
     public void SetSELevel(float level)
     {
         mixer.SetFloat("SEVol", -80 + level * 80f);
+    }
+
+    public void SetLevel(int level)
+    {
+        PlayerPrefs.SetInt("LevelSelected", level);
+        playClickSound();
     }
 }
